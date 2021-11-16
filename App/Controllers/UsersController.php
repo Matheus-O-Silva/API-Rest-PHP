@@ -9,7 +9,8 @@ class UsersController
     public function get($id = null)
     {
         if($id) {
-            return 'funcionou';
+            
+            return User::select($id);
         }
 
         return 'erro';

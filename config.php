@@ -2,7 +2,7 @@
 
     //Mysql
     const DBDRIVE = 'mysql';
-    const DBHOST = '127.0.0.1';
+    const DBHOST = 'localhost';
     const DBNAME = 'serie_login';
-    const DBUSER = 'root@localhost';
-    const DBPASS = '';
+    const DBUSER = 'matt@localhost';
+    const DBPASS = 'Pass_123';

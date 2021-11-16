@@ -17,15 +17,21 @@ if ($_SERVER['REQUEST_URI']) {
 
         $method = strtolower($_SERVER['REQUEST_METHOD']);
 
+        array_shift($uri);
+        array_shift($uri);
+
         try{
 
-            $response = call_user_func(array(new $controller, $method), $uri);
+            $response = call_user_func_array(array(new $controller, $method), $uri);
 
-            echo json_encode(array('status' => 'success', 'data' => $response));
+            http_response_code(200);
+            echo json_encode(array('status' => 'sucess', 'data' => $response));
 
         } catch (\Exception $e){
 
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            http_response_code(404);
+            echo json_encode(array('status' => 'error', 'data' => $e->getMessage()), JSON_UNESCAPED_UNICODE);
+            exit;
         }
     }
 }
