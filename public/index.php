@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_URI']) {
             $response = call_user_func_array(array(new $controller, $method), $uri);
 
             http_response_code(200);
-            echo json_encode(array('status' => 'sucess', 'data' => $response));
+            echo json_encode(array('status' => 'success', 'data' => $response));
 
         } catch (\Exception $e){
 

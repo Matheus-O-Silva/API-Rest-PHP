@@ -13,7 +13,7 @@ class UsersController
             return User::select($id);
         }
 
-        return 'erro';
+        return User::selectAll();
     }
 
     public function post()
