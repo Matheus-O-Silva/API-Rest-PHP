@@ -1,30 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youtube</title>
-    <style>
-        td, tr, table {
-            border: 1px solid black;
-        }
-    </style>
+    <meta charset='utf-8'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
 
-    <script type="text/javascript">
+    <form>  
 
-        var url = 'http://localhost:8000/api/users';
+        <label>ID do User</label>
+        <input id="productid"></input>
+        <br><br>
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.log('ERROR: ' + error.message);
-            })
-    </script>
-</body>
-</html> 
+        <button id="botao">Consultar</button>
+        <br><br>
+        
+        <label>resultado</label>
+        <input id="name"></input>
+        <br><br>
+
+        <label>Email</label>
+        <input id="email"></input>
+        <br><br>
+
+        <label>Password</label>
+        <input id="password"></input>
+        <br><br>
+
+    </form>
     
+    <script src="http://code.jquery.com/jquery-1.9.1.js">
+
+    function usertGet(ctl) {
+        // Get product id from data- attribute
+        var id = $(ctl).data("id");
+        
+        // Store product id in hidden field
+        $("#productid").val(id);
+        
+        // Call Web API to get a list of Users
+        $.ajax({
+            url: "http://localhost:8000/api/users/" + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (user) {
+                userToFields(user);
+                
+                // Change Update Button Text
+                $("#updateButton").text("Update");
+            },
+            error: function (request, message, error) {
+                handleException(request, message, error);
+            }
+        });
+    }
+
+        function userToFields(user) {
+        $("#name").val(user.name);
+        $("#email").val(user.email);
+        $("#password").val(user.password);
+    }
+    
+    </script>
+     
+</body>
+</html>
