@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-namespace App\Models\User;
+use App\Models\User;
 
 class AuthController {
     
@@ -11,19 +11,20 @@ class AuthController {
      * @param string $password
      * @return string 
      */
-    public function login() : string
+    public function login()
     {   
 
         $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
-        $sql = 'SELECT * FROM users WHERE name = :na';
+        $sql = 'SELECT * FROM user WHERE name = :na';
         $stmt = $connPdo->prepare($sql);
         $stmt->bindValue(':na', $_POST['name']);
         $stmt->execute();
-        $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        if($resultado > 0){
+        if($stmt->rowCount() > 0){
 
-            if(password_verify($_POST['senha'], $resultado['password'] )){
+            $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if($_POST['password'] == $resultado['password'] ){
 
                 //Application Key
                 $key = '123456';

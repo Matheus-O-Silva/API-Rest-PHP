@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_URI']) {
         $param      = ['param' => $uri[3]];
 
         try{
+           
 
             $response = call_user_func_array(array(new $controller, $method), $param);
 

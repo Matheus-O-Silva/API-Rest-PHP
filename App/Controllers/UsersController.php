@@ -37,7 +37,7 @@ class UsersController
 
     public function update()
     {
-        
+
     }
 
     public function delete()
