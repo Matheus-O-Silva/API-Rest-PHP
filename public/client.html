@@ -7,7 +7,8 @@
 </head>
 <body>
 
-    <div id="data"></div>
+    <div id="data">
+    </div>
     
     <script>
 
@@ -21,9 +22,10 @@
             var temp = "";
             data.data.forEach((itemData) => {
                 temp += "<tr>";
-                temp += "<td>" + itemData.id + "</td></br>";
-                temp += "<td>" + itemData.name + "</td></br>";
-                temp += "<td>" + itemData.email + "</td></tr></br></br>";
+                temp += "<label>" + itemData.name + "</label></br>";
+                temp += "<input value="+ itemData.id + "></input></br>";
+                temp += "<input value="+ itemData.name + "></input></br>";
+                temp += "<input value="+ itemData.email + "></input></br></br>";
             });
 
             document.getElementById('data').innerHTML = temp;
