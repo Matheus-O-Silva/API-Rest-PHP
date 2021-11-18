@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+namespace App\Models\User;
 
 class AuthController {
     
@@ -12,37 +13,54 @@ class AuthController {
      */
     public function login() : string
     {   
-        //Application Key
-        $key = '123456';
 
-        //Header Token
-        $header = [
-            'typ' => 'JWT',
-            'alg' => 'HS256'
-        ];
+        $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+        $sql = 'SELECT * FROM users WHERE name = :na';
+        $stmt = $connPdo->prepare($sql);
+        $stmt->bindValue(':na', $_POST['name']);
+        $stmt->execute();
+        $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        //Payload - Content
-        $payload = [
-            'name' => 'Matt',
-            'email' => 'email@email.com',
-        ];
+        if($resultado > 0){
 
-        //JSON
-        $header = json_encode($header);
-        $payload = json_encode($payload);
+            if(password_verify($_POST['senha'], $resultado['password'] )){
 
-        //Base 64
-        $header = base64_encode($header);
-        $payload = base64_encode($payload);
+                //Application Key
+                $key = '123456';
 
-        //Sign
-        $sign = hash_hmac('sha256', $header . "." . $payload, $key, true);
-        $sign = base64_encode($sign);
+                //Header Token
+                $header = [
+                    'typ' => 'JWT',
+                    'alg' => 'HS256'
+                ];
 
-        //Token
-        $token = $header . '.' . $payload . '.' . $sign;
+                //Payload - Content
+                $payload = [
+                    'name' => 'Matt',
+                    'email' => 'email@email.com',
+                ];
 
-        return $token;
+                //JSON
+                $header = json_encode($header);
+                $payload = json_encode($payload);
+
+                //Base 64
+                $header = base64_encode($header);
+                $payload = base64_encode($payload);
+
+                //Sign
+                $sign = hash_hmac('sha256', $header . "." . $payload, $key, true);
+                $sign = base64_encode($sign);
+
+                //Token
+                $token = $header . '.' . $payload . '.' . $sign;
+
+                return $token;
+            }
+
+            throw new \Exception('Não autenticado');
+
+        }
     
     }
 
