@@ -7,60 +7,33 @@
 </head>
 <body>
 
-    <form>  
-
-        <label>ID do User</label>
-        <input id="productid"></input>
-        <br><br>
-
-        <button id="botao">Consultar</button>
-        <br><br>
-        
-        <label>resultado</label>
-        <input id="name"></input>
-        <br><br>
-
-        <label>Email</label>
-        <input id="email"></input>
-        <br><br>
-
-        <label>Password</label>
-        <input id="password"></input>
-        <br><br>
-
-    </form>
+    <div id="data"></div>
     
-    <script src="http://code.jquery.com/jquery-1.9.1.js">
+    <script>
 
-    function usertGet(ctl) {
-        // Get product id from data- attribute
-        var id = $(ctl).data("id");
-        
-        // Store product id in hidden field
-        $("#productid").val(id);
-        
-        // Call Web API to get a list of Users
-        $.ajax({
-            url: "http://localhost:8000/api/users/" + id,
-            type: 'GET',
-            dataType: 'json',
-            success: function (user) {
-                userToFields(user);
-                
-                // Change Update Button Text
-                $("#updateButton").text("Update");
-            },
-            error: function (request, message, error) {
-                handleException(request, message, error);
+    fetch("http://localhost:8000/api/users").then(
+    res => {
+        res.json().then(
+        data => {
+            console.log(data.data);
+            if (data.data.length > 0) {
+
+            var temp = "";
+            data.data.forEach((itemData) => {
+                temp += "<tr>";
+                temp += "<td>" + itemData.id + "</td></br>";
+                temp += "<td>" + itemData.name + "</td></br>";
+                temp += "<td>" + itemData.email + "</td></tr></br></br>";
+            });
+
+            document.getElementById('data').innerHTML = temp;
             }
-        });
+        }
+        )
     }
+    )
 
-        function userToFields(user) {
-        $("#name").val(user.name);
-        $("#email").val(user.email);
-        $("#password").val(user.password);
-    }
+
     
     </script>
      
