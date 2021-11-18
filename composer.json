@@ -9,6 +9,7 @@
     },
 
     "require": {
-        "dompdf/dompdf": "v0.8.5"
+        "dompdf/dompdf": "v0.8.5",
+        "doctrine/annotations": "^1.13"
     }
 }

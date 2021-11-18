@@ -15,6 +15,10 @@ class ComposerStaticInit261ae81db6dd410d37755f76397f8a43
         array (
             'Svg\\' => 4,
         ),
+        'P' => 
+        array (
+            'Psr\\Cache\\' => 10,
+        ),
         'F' => 
         array (
             'FontLib\\' => 8,
@@ -22,6 +26,8 @@ class ComposerStaticInit261ae81db6dd410d37755f76397f8a43
         'D' => 
         array (
             'Dompdf\\' => 7,
+            'Doctrine\\Common\\Lexer\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
         ),
         'A' => 
         array (
@@ -34,6 +40,10 @@ class ComposerStaticInit261ae81db6dd410d37755f76397f8a43
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
         ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
         'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
@@ -41,6 +51,14 @@ class ComposerStaticInit261ae81db6dd410d37755f76397f8a43
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
         ),
         'App\\' => 
         array (

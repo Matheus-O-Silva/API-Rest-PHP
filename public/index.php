@@ -7,6 +7,7 @@ header('Content-Type: application/json');
 require_once  '../vendor/autoload.php';
 
 use App\Controllers\UsersController;
+use App\Controllers\AuthController;
 
 if ($_SERVER['REQUEST_URI']) {
 
@@ -19,14 +20,13 @@ if ($_SERVER['REQUEST_URI']) {
 
         $controller = 'App\Controllers\\'.ucfirst($uri[1]).'Controller';
 
-        $method = strtolower($_SERVER['REQUEST_METHOD']);
+        $method     = strtolower($uri[2]);
 
-        array_shift($uri);
-        array_shift($uri);
+        $param      = ['param' => $uri[3]];
 
         try{
 
-            $response = call_user_func_array(array(new $controller, $method), $uri);
+            $response = call_user_func_array(array(new $controller, $method), $param);
 
             http_response_code(200);
             echo json_encode(array('status' => 'success', 'data' => $response));
